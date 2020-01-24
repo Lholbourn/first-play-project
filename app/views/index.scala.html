@@ -1,0 +1,54 @@
+@(years: List[String] = List("2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020"))
+
+@main("Date finder") {
+<div class="container">
+    <div class="justify-content-center">
+        @_banner()
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col-8">
+                <div class="weather-search border-light p-2 rounded bg-light">
+                    <h4 class="text-center">Day & weather finder (for planning future events)</h4>
+                    <form action="/day">
+                        <div class="form-group">
+                            <label for="d">Day:</label>
+                            <input type="text" class="form-control" id="d" placeholder="Enter day of week" name="d">
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="diary-search border-light p-2 mt-2 rounded bg-light">
+                    <h4 class="text-center">Month & year finder (for previous diary appointments)</h4>
+                    <form action="/month">
+                        <div class="form-row">
+                            <div class="form-group col">
+                                <label for="m">Month:</label>
+                                <input type="text" class="form-control" id="m" placeholder="Enter a month" name="m">
+                            </div>
+                            <div class="form-group col">
+                                <label for="year">Year:</label>
+                                <select class="form-control" id="year" name="y">
+                                    @for(year <- years) {
+                                    <option value="@year">@year</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn justify-content-right">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+}
