@@ -1,4 +1,12 @@
 package models
 
-case class WeatherInfo(weather: Array[Any], dt_text: Int)
-case class ApiResult(list: Array[Any])
+import io.circe.Json
+
+case class WeatherInfo(dt_txt: String, weather: Array[Json])
+case class ApiResult(list: Array[Json])
+case class WeatherDesc(description: String)
+
+case class FullStuff(list: StuffInBrackets)
+case class StuffInBrackets(w: WeatherStuff, dtStuff: Int)
+case class WeatherStuff(id: Int, main: String, desc: String, icon: String)
+
