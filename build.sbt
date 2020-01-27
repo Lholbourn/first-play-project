@@ -19,11 +19,17 @@ ws
 libraryDependencies += "com.softwaremill.sttp" %% "core" % "1.7.2"
 libraryDependencies +=  "org.scalaj" %% "scalaj-http" % "2.4.2"
 
+
 libraryDependencies ++= Seq(
-  "io.circe" %% "circe-core",
-  "io.circe" %% "circe-generic",
-  "io.circe" %% "circe-parser"
+"io.circe" %% "circe-core",
+"io.circe" %% "circe-generic",
+"io.circe" %% "circe-parser"
 ).map(_ % circeVersion)
+
+libraryDependencies += "org.typelevel" %% "cats-core" % "2.0.0"
+
+
+
 
 
 // Adds additional packages into Twirl
