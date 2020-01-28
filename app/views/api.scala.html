@@ -1,5 +1,17 @@
-@(results: ApiResult)
+@(results: Array[Forecast])
 
 @main("api") {
-<h1>@results</h1>
+<div class="container">
+    <div class="justify-content-center">
+        @_banner()
+    </div>
+    <div class="row row-cols-4 d-flex">
+        @for(result <- results) {
+        <div class="col mb-4">
+        @_weathercard(result)
+        </div>
+        }
+    </div>
+</div>
+
 }
