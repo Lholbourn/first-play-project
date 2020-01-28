@@ -1,0 +1,17 @@
+@(forecast: Forecast)
+<!--Reminder of what forecast is below:-->
+<!--case class Forecast(dateAndTime: WeatherInfo, description: WeatherDesc)-->
+
+@main("Weather Cards") {
+<div class="card border-secondary h-100">
+    <img
+            src="https://www.fillmurray.com/g/100/100"
+            class="card-img-top"
+            alt="..."
+    />
+    <div class="card-body">
+        <h5 class="card-title">@forecast.dateAndTime.dt_txt</h5>
+        <p class="card-text">@forecast.description.description</p>
+    </div>
+</div>
+}
