@@ -1,4 +1,8 @@
+@import java.util.Calendar
+@import java.text.SimpleDateFormat
 @(forecast: Forecast)
+
+
 <!--Reminder of what forecast is below:-->
 <!--case class Forecast(dateAndTime: WeatherInfo, description: WeatherDesc)-->
 
@@ -6,23 +10,23 @@
 <div class="card border-secondary h-100">
     <div class="card-body text-center">
         <div class="font-aw">
-            @if((forecast.description.description.split(" ") contains "clouds" ) ||
-            (forecast.description.description.split(" ") contains "cloud" )){
+            @if((forecast.desc.description.split(" ") contains "clouds" ) ||
+            (forecast.desc.description.split(" ") contains "cloud" )){
             <span class="fas fa-cloud"></span>
             }
-            @if(forecast.description.description.split(" ") contains "rain"){
+            @if(forecast.desc.description.split(" ") contains "rain"){
             <i class="fas fa-cloud-showers-heavy"></i>
             }
-            @if(forecast.description.description.split(" ") contains "snow"){
+            @if(forecast.desc.description.split(" ") contains "snow"){
             <i class="fas fa-snowflake"></i>
             }
-            @if((forecast.description.description.split(" ") contains "sun") ||
-            (forecast.description.description.split(" ")
+            @if((forecast.desc.description.split(" ") contains "sun") ||
+            (forecast.desc.description.split(" ")
             contains "clear")){
             <i class="fas fa-sun"></i>
             }
         </div>
-        <h5 class="card-title">@forecast.dateAndTime.dt_txt</h5>
-        <p class="card-text">@forecast.description.description</p>
+        <h5 class="card-title">@forecast.dateAndTime.getFormattedDate</h5>
+        <p class="card-text">@forecast.desc.description</p>
     </div>
 </div>
