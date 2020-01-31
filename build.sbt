@@ -27,6 +27,7 @@ libraryDependencies ++= Seq(
 ).map(_ % circeVersion)
 
 libraryDependencies += "org.typelevel" %% "cats-core" % "2.0.0"
+libraryDependencies += "com.github.nscala-time" %% "nscala-time" % "2.22.0"
 
 
 

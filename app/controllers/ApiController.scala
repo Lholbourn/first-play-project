@@ -4,16 +4,15 @@ import com.softwaremill.sttp.{HttpURLConnectionBackend, _}
 import io.circe._
 import io.circe.generic.auto._
 import io.circe.parser._
-import io.circe.Decoder
 import javax.inject.Inject
 import models.{ApiResult, Forecast, WeatherDesc, WeatherInfo}
 import play.api.mvc.{Request, _}
-import cats.syntax.either._
-
+import java.util.Calendar
+import java.text.SimpleDateFormat
 
 class ApiController @Inject()(val controllerComponents: ControllerComponents) extends BaseController {
 
-  def apiCall: Action[AnyContent] =  Action { implicit request: Request[AnyContent] =>
+  def apiCall: Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     val apiKey = sys.env("WEATHER_API_KEY")
     val request = sttp.get(
       uri"https://api.openweathermap.org/data/2.5/forecast?lat=51.482056&lon=-0.280056&APPID=${apiKey}"
@@ -38,21 +37,21 @@ class ApiController @Inject()(val controllerComponents: ControllerComponents) ex
     }
   }
 
-
   def apiResultWithMaps(apiResult: ApiResult): Array[Forecast] = {
     //   MAP RATHER THAN FOR LOOP
     apiResult.list.flatMap { jsonInstance =>
-    val decodedWeather: Either[Error, WeatherInfo] = decode[WeatherInfo](jsonInstance.toString())
+      val decodedWeather: Either[Error, WeatherInfo] = decode[WeatherInfo](jsonInstance.toString())
       val weatherInfo: WeatherInfo = decodedWeather match {
         case Right(result: WeatherInfo) => result
       }
+
       val weather: Array[Json] = weatherInfo.weather
       weather.map { info =>
-      val decodedWeatherInfo: Either[Error, WeatherDesc] = decode[WeatherDesc](info.toString)
+        val decodedWeatherInfo: Either[Error, WeatherDesc] = decode[WeatherDesc](info.toString)
         val weatherDesc: WeatherDesc = decodedWeatherInfo match {
           case Right(desc: WeatherDesc) => desc
         }
-        Forecast(dateAndTime = weatherInfo, description = weatherDesc)
+        Forecast(dateAndTime = weatherInfo, desc = weatherDesc)
       }
     }
   }
